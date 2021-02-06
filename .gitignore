@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# media files
+*.mp3
+*.mp4
+
+# local stuffs
+.DS_Store

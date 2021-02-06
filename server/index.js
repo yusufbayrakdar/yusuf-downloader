@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const routes = require('./youtube/index.js');
+
+app.use("/", routes.router);
 
 app.use((err, req, res, next) => {
 	console.error(err);
