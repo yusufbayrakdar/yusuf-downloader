@@ -8,10 +8,10 @@ const ytdl = require('ytdl-core');
  * @apiPermission anyone
  * @apiSuccess {File}   file                              requested file
  */
-router.get("/:id/", async (req, res, next) => {
-    var id = req.params.id;
-    var title = await getInfo(`https://www.youtube.com/watch?v=${id}`);
-    await getStream(`https://www.youtube.com/watch?v=${id}`, title);
+router.get("/", async (req, res, next) => {
+    var url = req.query.url;
+    var title = await getInfo(url);
+    await getStream(url, title);
     res.download(`${__dirname}/../${title}.mp4`);
 });
 
