@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "downloader server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yusufbayrakdar/yusuf-downloader.git"
+  },
+  "author": "Sabri Bayrakdar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yusufbayrakdar/yusuf-downloader/issues"
+  },
+  "homepage": "https://github.com/yusufbayrakdar/yusuf-downloader#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "youtube-dl": "^3.1.0"
+  }
+}
