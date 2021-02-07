@@ -11,8 +11,13 @@ var title = '';
  */
 router.get("/", async (req, res, next) => {
     var url = req.query.url;
-    if (title.length > 0)
-        fs.unlink(`${__dirname}/../${title}.mp4`);
+    if (title.length > 0) {
+        fs.unlink(`${__dirname}/../${title}.mp4`, (error) => {
+            if (error) {
+                throw error;
+            }
+        });
+    }
     title = await getInfo(url);
     await getStream(url, title);
     res.download(`${__dirname}/../${title}.mp4`);
