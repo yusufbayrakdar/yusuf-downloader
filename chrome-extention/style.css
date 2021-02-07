@@ -1,0 +1,121 @@
+html body{
+    background: whitesmoke;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 400px;
+    display: grid;
+    grid-template-columns: 10em 1fr 1fr 10em;
+    user-select: none;
+    grid-template-areas: 
+        "mheader mheader mheader mheader"
+        "mbody mbody mbody mbody"
+        "video-image-field video-image-field download download";
+}
+
+.logo{
+    width: 40px;
+    height: 70%;
+    margin-left: 15px;
+    margin-top: 20%;
+    clip-path: circle(50% at 50% 50%);
+    grid-area: logo;
+}
+
+.download-logo{
+    font-size: 40px;
+}
+
+.path-logo{
+    color: rgb(163, 163, 163);
+    font-size: 20px;
+}
+
+#video-image{
+    width: 100%;
+    height: auto;
+    clip-path: inset(12% 0 12% 0);
+    grid-area: video-image;
+    margin-top: -19px;
+}
+
+#video-image-field{
+    grid-area: video-image-field;
+    min-height: 112px;
+    max-height: 112px;
+    overflow: hidden;
+    background: rgb(90, 90, 90);
+}
+
+.download-text{
+    text-indent: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.modal-header{
+    background: whitesmoke;
+    position: relative;
+    height: 60px;
+    grid-area: mheader;
+    display: grid;
+    text-align: center;
+    grid-template-columns: .5fr 3fr 1fr 1fr;
+    grid-template-areas: 
+        "logo header-title . button-field"
+}
+
+.button-field{
+    grid-area: button-field;
+}
+
+.header-bg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+.header-title{
+    color: black;
+    z-index: 1;
+    grid-area: header-title;
+    cursor: default;
+    padding-top: 6px;
+}
+
+#download{
+    grid-area: download;
+    display: grid;
+    grid-template-columns: 10em minmax(100%) 10em;
+    background-color: rgb(211, 211, 211);
+    grid-template-areas: 
+        ". . ."
+        "download-btn download-btn download-btn"
+        ". . ."
+}
+
+#download-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    grid-area: download-btn;
+    cursor: pointer;
+}
+
+#path-btn{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    clip-path: circle(50% at 50% 50%);
+}
+
+#path-btn:hover .path-logo{
+    color: rgb(92, 92, 92);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

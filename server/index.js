@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const routes = require('./youtube/index.js');
+var cors = require('cors');
+
+app.use(cors());
 
 app.use("/", routes.router);
 

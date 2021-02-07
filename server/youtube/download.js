@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 const ytdl = require('ytdl-core');
+var title = '';
 /**
  * @api {get} /download/:id returns requested file
  * @apiName returns requested file
@@ -10,7 +11,9 @@ const ytdl = require('ytdl-core');
  */
 router.get("/", async (req, res, next) => {
     var url = req.query.url;
-    var title = await getInfo(url);
+    if (title.length > 0)
+        fs.unlink(`${__dirname}/../${title}.mp4`);
+    title = await getInfo(url);
     await getStream(url, title);
     res.download(`${__dirname}/../${title}.mp4`);
 });
