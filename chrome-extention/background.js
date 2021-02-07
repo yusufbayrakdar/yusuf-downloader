@@ -1,7 +1,7 @@
 async function downloadVideo() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
         let url = tabs[0].url;
-        window.location.assign(`http://localhost:3811/download/?url=${url}`);
+        window.location.assign(`https://yusuf-downloader.herokuapp.com/download/?url=${url}`);
     });
 }
 function getUrl() {
