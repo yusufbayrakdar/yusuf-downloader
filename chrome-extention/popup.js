@@ -1,2 +1,2 @@
-document.getElementById("download").addEventListener("click", downloadVideo);
+document.getElementById("download-btn").addEventListener("click", downloadVideo);
 getUrl();

@@ -1,3 +1,5 @@
+@font-face { font-family: gilroyBold; src: url('./fonts/Gilroy-Bold.ttf'); } 
+@font-face { font-family: gilroyMedium; src: url('./fonts/Gilroy-Medium.ttf'); } 
 html body{
     background: whitesmoke;
     margin: 0;
@@ -91,6 +93,8 @@ html body{
     background-color: rgb(211, 211, 211);
     grid-template-areas: 
         ". . ."
+        "select select select"
+        ". . ."
         "download-btn download-btn download-btn"
         ". . ."
 }
@@ -100,6 +104,18 @@ html body{
     margin-right: 10px;
     grid-area: download-btn;
     cursor: pointer;
+}
+
+#select{
+    margin-left: 10px;
+    margin-right: 10px;
+    grid-area: select;
+    cursor: pointer;
+    text-indent: 10px;
+    margin-right: 10px;
+    background: #ebebeb;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 #path-btn{
@@ -118,4 +134,12 @@ html body{
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+/* Fonts */
+.bold{
+    font-family: gilroyBold;
+}
+.medium{
+    font-family: gilroyMedium;
 }
