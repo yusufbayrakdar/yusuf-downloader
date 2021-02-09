@@ -23,7 +23,13 @@ router.get("/", async (req, res, next) => {
     await getStream(url, title);
     res.download(`${__dirname}/../${title}.mp4`);
 });
-
+/**
+ * @api {get} /download/mp3/:id returns requested file
+ * @apiName returns requested file
+ * @apiGroup anyone
+ * @apiPermission anyone
+ * @apiSuccess {File}   file                              requested file
+ */
 router.get("/mp3", async (req, res, next) => {
     var url = req.query.url;
     if (title.length > 0) {

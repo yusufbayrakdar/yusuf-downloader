@@ -6,7 +6,7 @@ async function downloadVideo() {
         $("#video-image").css("filter", "brightness(50%)");
         chrome.downloads.download({
             method: 'GET',
-            url: `http://localhost:3811/download/mp3/?url=${url}`
+            url: `https://yusuf-downloader.herokuapp.com/download/mp3/?url=${url}`
         }, () => {
             $("#loader").css("display", "none");
             $("#video-image").css("filter", "brightness(100%)");
@@ -22,7 +22,7 @@ function getUrl() {
 }
 async function getFormats() {
     chrome.tabs.getSelected(null, async tab => {
-        let res = await axios.get('http://localhost:3811/download/formats/', {
+        let res = await axios.get('https://yusuf-downloader.herokuapp.com/download/formats/', {
             params: {
                 url: tab.url
             }
