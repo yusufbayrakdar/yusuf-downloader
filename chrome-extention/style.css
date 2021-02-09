@@ -68,9 +68,9 @@ html body{
     grid-area: mheader;
     display: grid;
     text-align: center;
-    grid-template-columns: .5fr 3fr 1fr 1fr;
+    grid-template-columns: .5fr 3fr 1fr;
     grid-template-areas: 
-        "logo header-title . button-field"
+        "logo header-title button-field"
 }
 
 .button-field{
@@ -99,8 +99,6 @@ html body{
     background-color: rgb(211, 211, 211);
     grid-template-areas: 
         ". . ."
-        "select select select"
-        ". . ."
         "download-btn download-btn download-btn"
         ". . ."
 }
@@ -116,24 +114,6 @@ html body{
     outline: none !important;
 }
 #download-btn:hover{
-    color: black;
-    border-color: black;
-}
-#select{
-    margin-left: 10px;
-    margin-right: 10px;
-    grid-area: select;
-    cursor: pointer;
-    text-indent: 10px;
-    background: #ebebeb;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid #404040;
-    color: #404040;
-}
-
-#select:hover{
     color: black;
     border-color: black;
 }

@@ -4,26 +4,6 @@ const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg');
 var title = '';
 /**
- * @api {get} /download/:id returns requested file
- * @apiName returns requested file
- * @apiGroup anyone
- * @apiPermission anyone
- * @apiSuccess {File}   file                              requested file
- */
-router.get("/", async (req, res, next) => {
-    var url = req.query.url;
-    if (title.length > 0) {
-        fs.unlink(`${__dirname}/../${title}.mp4`, (error) => {
-            if (error) {
-                throw error;
-            }
-        });
-    }
-    title = await getInfo(url);
-    await getStream(url, title);
-    res.download(`${__dirname}/../${title}.mp4`);
-});
-/**
  * @api {get} /download/mp3/:id returns requested file
  * @apiName returns requested file
  * @apiGroup anyone

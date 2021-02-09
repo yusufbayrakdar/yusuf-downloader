@@ -1,4 +1,3 @@
-const resolutionList = ["1080p", "720p", "480p", "360p", "240p", "144p"];
 async function downloadVideo() {
     chrome.tabs.getSelected(null, tab => {
         let url = tab.url;
@@ -20,20 +19,3 @@ function getUrl() {
         document.getElementById("video-image").src = `https://img.youtube.com/vi/${videoId}/0.jpg`
     });
 }
-async function getFormats() {
-    chrome.tabs.getSelected(null, async tab => {
-        let res = await axios.get('https://yusuf-downloader.herokuapp.com/download/formats/', {
-            params: {
-                url: tab.url
-            }
-        });
-
-        resolutionList.forEach(resolution => {
-            if (res.data.includes(resolution)) {
-                $("#select").append(new Option(resolution, resolution));
-            }
-        });
-        return res;
-    });
-}
-// chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => { if (tab.url.includes('youtube.com') && tab.url.includes('watch')) { alert('update'); getFormats(); } });
