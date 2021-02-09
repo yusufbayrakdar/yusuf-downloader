@@ -1,2 +1,8 @@
-document.getElementById("download-btn").addEventListener("click", downloadVideo);
 getUrl();
+$("#download-btn").click(function () {
+    downloadVideo();
+});
+$(function () {
+    $("#loader").css("display", "none");
+    $("#loader").load("./loader.html");
+});

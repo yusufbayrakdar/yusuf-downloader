@@ -28,11 +28,6 @@ html body{
     font-size: 40px;
 }
 
-.path-logo{
-    color: rgb(163, 163, 163);
-    font-size: 20px;
-}
-
 #video-image{
     width: 100%;
     height: auto;
@@ -47,6 +42,17 @@ html body{
     max-height: 112px;
     overflow: hidden;
     background: rgb(90, 90, 90);
+    position: relative;
+}
+
+#loader{
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    z-index: 1;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
 }
 
 .download-text{
@@ -100,33 +106,36 @@ html body{
 }
 
 #download-btn{
+    color: #404040;
     margin-left: 10px;
     margin-right: 10px;
     grid-area: download-btn;
     cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #404040;
+    outline: none !important;
 }
-
+#download-btn:hover{
+    color: black;
+    border-color: black;
+}
 #select{
     margin-left: 10px;
     margin-right: 10px;
     grid-area: select;
     cursor: pointer;
     text-indent: 10px;
-    margin-right: 10px;
     background: #ebebeb;
     font-size: 15px;
     font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #404040;
+    color: #404040;
 }
 
-#path-btn{
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    clip-path: circle(50% at 50% 50%);
-}
-
-#path-btn:hover .path-logo{
-    color: rgb(92, 92, 92);
+#select:hover{
+    color: black;
+    border-color: black;
 }
 
 .center{

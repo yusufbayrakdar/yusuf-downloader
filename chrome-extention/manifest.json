@@ -17,7 +17,7 @@
     },
     "permissions": [
         "tabs",
-        "*://*.reddit.com/*",
-        "activeTab"
+        "activeTab",
+        "downloads"
     ]
 }
