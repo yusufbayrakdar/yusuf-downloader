@@ -4,7 +4,8 @@
   "description": "downloader server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index",
+    "production": "npm install & node index"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
-    "ytdl": "^1.4.1"
+    "ytdl": "^1.4.1",
+    "ytdl-core": "^4.5.0"
   }
 }
