@@ -1,23 +1,17 @@
 {
-    "manifest_version": 2,
-    "name": "Yusuf's Extention",
-    "description": "My First Extention",
-    "version": "1.0.0",
-    "background": {
-        "scripts": [
-            "background.js"
-        ]
-    },
-    "icons": {
-        "128": "youtube.png"
-    },
-    "browser_action": {
-        "default_icon": "youtube.png",
-        "default_popup": "popup.html"
-    },
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "downloads"
-    ]
+  "manifest_version": 2,
+  "name": "Yusuf's Extention",
+  "description": "My First Extention",
+  "version": "1.0.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "128": "youtube.png"
+  },
+  "browser_action": {
+    "default_icon": "youtube.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs", "activeTab", "downloads", "https://www.youtube.com/*"]
 }
