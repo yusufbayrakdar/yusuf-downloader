@@ -2,7 +2,7 @@ const router = require("express").Router();
 const fs = require("fs");
 const ytdl = require("ytdl-core");
 const ffmpeg = require("ffmpeg");
-var title = "";
+const { v4: uuid } = require("uuid");
 /**
  * @api {get} /download/mp3/:id returns requested file
  * @apiName returns requested file
@@ -12,43 +12,46 @@ var title = "";
  */
 router.get("/mp3", async (req, res, next) => {
   var url = req.query.url;
-  console.log("url", url);
-  if (title.length > 0) {
-    try {
-      fs.unlink(`${__dirname}/../${title}.mp4`, error => {
-        if (error) {
-          throw error;
-        }
-      });
-      fs.unlink(`${__dirname}/../${title}.mp3`, error => {
-        if (error) {
-          throw error;
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   const info = await getInfo(url);
   const { lengthSeconds, isLive } = info;
-  console.log("isLive", isLive, "lengthSeconds", lengthSeconds);
   if (lengthSeconds > 601 || isLive) {
-    title = "";
     res.status(400).send("video-length-error");
   } else {
-    title = info.title;
-    await getStream(url, title);
+    var title = info.title;
+    var fileId = uuid();
+    await getStream(url, fileId);
     try {
-      var process = new ffmpeg(`${__dirname}/../${title}.mp4`);
+      var process = new ffmpeg(`${__dirname}/../${fileId}.mp4`);
       process.then(
         function(video) {
-          video.fnExtractSoundToMP3(`${__dirname}/../${title}.mp3`, function(
+          video.fnExtractSoundToMP3(`${__dirname}/../${fileId}.mp3`, function(
             error
           ) {
             if (!error) {
-              res.download(`${__dirname}/../${title}.mp3`);
+              res.download(
+                `${__dirname}/../${fileId}.mp3`,
+                `/${title}.mp3`,
+                () => {
+                  try {
+                    fs.unlink(`${__dirname}/../${fileId}.mp4`, error => {
+                      if (error) {
+                        throw error;
+                      }
+                    });
+                    fs.unlink(`${__dirname}/../${fileId}.mp3`, error => {
+                      if (error) {
+                        throw error;
+                      }
+                    });
+                  } catch (error) {
+                    console.error(error);
+                    throw Error("File cannot be found 😔");
+                  }
+                }
+              );
             } else {
               console.log("error", error);
+              throw Error("Something went wrong 😔");
             }
           });
         },
@@ -76,10 +79,10 @@ const nameCorrectionForPath = name =>
     .replace(/(\s+)/g, "_")
     .replace(/[^aA-üÜöÖğĞıİşŞzZ\s\d-]/g, "");
 
-const getStream = async (url, title) => {
+const getStream = async (url, fileId) => {
   return new Promise((resolve, reject) => {
     const stream = ytdl(url)
-      .pipe(fs.createWriteStream(`${title}.mp4`))
+      .pipe(fs.createWriteStream(`${fileId}.mp4`))
       .on("close", () => {
         return resolve(stream);
       });

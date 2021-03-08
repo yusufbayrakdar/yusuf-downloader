@@ -1,0 +1,10 @@
+{
+  "name": "chrome-extention",
+  "version": "1.0.0",
+  "description": "youtube mp3 downloader",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  },
+  "author": "Yusuf Sabri Bayrakdar",
+  "license": "ISC"
+}
