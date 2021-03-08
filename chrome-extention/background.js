@@ -36,7 +36,7 @@ async function downloadVideo() {
       let url = tab.url;
       chrome.downloads.download({
         method: "GET",
-        url: `http://localhost:3811/download/mp3/?url=${url}`
+        url: `https://yusuf-downloader.herokuapp.com/download/mp3/?url=${url}`
       });
     });
   } catch (error) {
