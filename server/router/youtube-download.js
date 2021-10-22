@@ -13,32 +13,33 @@ const { v4: uuid } = require("uuid");
 router.get("/mp3", async (req, res, next) => {
   var url = req.query.url;
   const info = await getInfo(url);
-  const { lengthSeconds, isLive } = info;
-  if (lengthSeconds > 601 || isLive) {
-    res.status(400).send("video-length-error");
-  } else {
-    var title = info.title;
-    var fileId = uuid();
-    await getStream(url, fileId);
-    try {
-      var process = new ffmpeg(`${__dirname}/../${fileId}.mp4`);
-      process.then(
-        function(video) {
-          video.fnExtractSoundToMP3(`${__dirname}/../${fileId}.mp3`, function(
-            error
-          ) {
+  // NOTE: Video length restriction is removed for now
+  // const { lengthSeconds, isLive } = info;
+  // if (lengthSeconds > 601 || isLive) {
+  //   res.status(400).send("video-length-error");
+  // } else {
+  var title = info.title;
+  var fileId = uuid();
+  await getStream(url, fileId);
+  try {
+    var process = new ffmpeg(`${__dirname}/../${fileId}.mp4`);
+    process.then(
+      function (video) {
+        video.fnExtractSoundToMP3(
+          `${__dirname}/../${fileId}.mp3`,
+          function (error) {
             if (!error) {
               res.download(
                 `${__dirname}/../${fileId}.mp3`,
                 `/${title}.mp3`,
                 () => {
                   try {
-                    fs.unlink(`${__dirname}/../${fileId}.mp4`, error => {
+                    fs.unlink(`${__dirname}/../${fileId}.mp4`, (error) => {
                       if (error) {
                         throw error;
                       }
                     });
-                    fs.unlink(`${__dirname}/../${fileId}.mp3`, error => {
+                    fs.unlink(`${__dirname}/../${fileId}.mp3`, (error) => {
                       if (error) {
                         throw error;
                       }
@@ -53,25 +54,26 @@ router.get("/mp3", async (req, res, next) => {
               console.log("error", error);
               throw Error("Something went wrong 😔");
             }
-          });
-        },
-        function(err) {
-          console.log("Error: " + err);
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+          }
+        );
+      },
+      function (err) {
+        console.log("Error: " + err);
+      }
+    );
+  } catch (error) {
+    console.log(error);
   }
+  // }
 });
 
-const getInfo = async url => {
+const getInfo = async (url) => {
   const response = await ytdl.getInfo(url);
   const { title, lengthSeconds, isLive } = response.videoDetails;
   return { title: nameCorrectionForPath(title), lengthSeconds, isLive };
 };
 
-const nameCorrectionForPath = name =>
+const nameCorrectionForPath = (name) =>
   name &&
   name
     .replace(/[//]/g, "\\")
